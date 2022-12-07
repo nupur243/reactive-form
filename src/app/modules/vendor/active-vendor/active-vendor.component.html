@@ -1,38 +1,53 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="mb-3">
-                <label for="fname" class="form-label">Name</label>
-                <input type="text" class="form-control" id="fname" placeholder="">
+    <form [formGroup]="htmlForm" (ngSubmit)="onSubmit($event)">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="fname" class="form-label">Name</label>
+                    <small
+                    [class.d-none]="htmlForm.get('name').valid || htmlForm.get('name').untouched"
+                    class="text-danger error-message">Username is required</small>
+                    <input [class.is-invalid]="htmlForm.get('name').invalid&&
+                                        htmlForm.get('name').touched" type="text" class="form-control" id="fname"
+                        placeholder="" formControlName="name">
+                  
+                 
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <small [class.d-none]="htmlForm.get('email').valid || htmlForm.get('email').untouched"
+                    class="text-danger error-message">User Email is required</small>
+                    <input type="email" [class.is-invalid]="htmlForm.get('email').invalid&&
+                    htmlForm.get('email').touched" class="form-control" id="username" placeholder=""
+                        formControlName="email" >
+                </div>
+              
+
+                <div class="mb-3">
+                    <label for="bio" class="form-label">Bio</label>
+                    <textarea class="form-control" id="bio" rows="3" formControlName="bio" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <select class="form-select" aria-label="Default select example" formControlName="domain">
+                        <option value="">Please Select Domain</option>
+                        <option value="erp">ERP</option>
+                        <option value="crm">CRM</option>
+                        <option value="ecommerce">E-commerce</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit"[disabled]="!htmlForm.valid" class="btn btn-primary btn" >Submit</button>
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label for="username" class="form-label">Email</label>
-                <input type="email" class="form-control" id="username" placeholder="">
-            </div>
-
-            <div class="mb-3">
-                <label for="bio" class="form-label">Bio</label>
-                <textarea class="form-control" id="bio" rows="3"></textarea>
-            </div>
-
-            <div class="mb-3">
-                <select class="form-select" aria-label="Default select example">
-                    <option value="">Please Select Domain</option>
-                    <option value="erp">ERP</option>
-                    <option value="crm">CRM</option>
-                    <option value="ecommerce">E-commerce</option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <button type="button" class="btn btn-primary">Submit</button>
+            <div class="col-md-6" id="Object">
+                display your object here
             </div>
         </div>
-
-        <div class="col-md-6">
-            <h1>Object should be print here</h1>
-        </div>
-    </div>
-
+    </form>
 </div>
+
+<!-- (click)="onSubmit($event) -->
